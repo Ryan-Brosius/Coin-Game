@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   multiplierName: Aureus
   multiplierDescription: 
-  headsMultiplier: 25
-  tailsMultiplier: 0.04
+  headsMultiplier: 10
+  tailsMultiplier: 0.1

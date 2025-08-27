@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9ef1e0116cc1964790a4b9e0de82a75, type: 3}
-  m_Name: Rigged Coin
+  m_Name: Commemorative Coin
   m_EditorClassIdentifier: 
-  gimmickName: Rigged Coin
+  gimmickName: Commemorative
   gimmickDescription: 
   effects:
-  - {fileID: 11400000, guid: aecd9775957111346b1aa3fa42d526a0, type: 2}
-  - {fileID: 11400000, guid: 9abb82c7742971d49a9dc7cff194a34f, type: 2}
+  - {fileID: 11400000, guid: 1f68fb3504827f14283ee5d333a59247, type: 2}
+  rarity: 1

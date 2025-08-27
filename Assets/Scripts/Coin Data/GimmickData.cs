@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CoinData", menuName = "Coins/Gimmick")]
@@ -5,9 +6,17 @@ public class GimmickData : ScriptableObject
 {
     public string gimmickName;
     public string gimmickDescription;
-    public GimmickEffect[] effects;
+    public List<GimmickEffect> effects = new List<GimmickEffect>();
+    public GimmickRarity rarity;
 
-    // Adjust odds if we want :)
+    public enum GimmickRarity
+    {
+        Common,
+        Uncommon,
+        Rare,
+    }
+
+    // what the fuck was I cooking when I made this shit?
     public float AdjustHeadsChance(float baseChance)
     {
         float modified = baseChance;
@@ -17,11 +26,11 @@ public class GimmickData : ScriptableObject
     }
 
     // Callback when coin is flipped if we need to do something
-    public float ApplyEffect(float value, bool isHeads, CoinManager manager)
+    public float ApplyEffect(float value, bool isHeads, CoinManager manager, CoinInstance coinInstance)
     {
         float modified = value;
         foreach (var effect in effects)
-            modified = effect.ApplyEffect(modified, isHeads, manager);
+            modified = effect.ApplyEffect(modified, isHeads, manager, coinInstance);
         return modified;
     }
 

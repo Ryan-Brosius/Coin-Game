@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9ef1e0116cc1964790a4b9e0de82a75, type: 3}
-  m_Name: Risk Coin
+  m_Name: Lucky Coin
   m_EditorClassIdentifier: 
-  gimmickName: Risk Coin
+  gimmickName: Lucky
   gimmickDescription: 
   effects:
-  - {fileID: 11400000, guid: 631545255f9161e49801e8ebba5083ca, type: 2}
-  - {fileID: 11400000, guid: 3719a73f9e307f84d97ee3e791b22a43, type: 2}
+  - {fileID: 11400000, guid: 67990029d7c29f340a437621866b8fa9, type: 2}
+  rarity: 0

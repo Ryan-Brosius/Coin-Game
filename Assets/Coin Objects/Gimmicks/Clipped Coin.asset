@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9ef1e0116cc1964790a4b9e0de82a75, type: 3}
   m_Name: Clipped Coin
   m_EditorClassIdentifier: 
-  gimmickName: Clipped Coin
+  gimmickName: Clipped
   gimmickDescription: 
   effects:
   - {fileID: 11400000, guid: 9c19556ba9074034cba02a93b7055f8c, type: 2}
-  - {fileID: 11400000, guid: 7a1ee6e0857d9f24686802da328cf11a, type: 2}
+  rarity: 0
