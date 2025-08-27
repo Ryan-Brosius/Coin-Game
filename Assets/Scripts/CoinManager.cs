@@ -13,6 +13,37 @@ public class CoinManager : MonoBehaviour
     public List<CoinData> startingCoins;
     private List<CoinInstance> activeCoins = new List<CoinInstance>();
 
+    public CoinInstance CurrentFlippingCoin;
+    public CoinInstance NextFlippingCoin
+    {
+        get
+        {
+            if (CurrentFlippingCoin == null) return null;
+
+            int index = activeCoins.IndexOf(CurrentFlippingCoin);
+            if (index >= 0 && index < activeCoins.Count - 1)
+            {
+                return activeCoins[index + 1];
+            }
+
+            return null;
+        }
+    }
+    public CoinInstance NextCoinAfterThis(CoinInstance coin)
+    {
+        int index = activeCoins.IndexOf(coin);
+        if (index >= 0 && index < activeCoins.Count - 1)
+        {
+            return activeCoins[index + 1];
+        }
+
+        return null;
+    }
+    public bool OnCoinEventCalledFromCurrentFlippingCoin(CoinInstance coin)
+    {
+        return CurrentFlippingCoin == coin;
+    }
+
     [Header("Coin Gimmicks")]
     public List<GimmickData> gimmicks = new List<GimmickData>();
 
@@ -24,16 +55,30 @@ public class CoinManager : MonoBehaviour
     {
         foreach (var coinTemplate in startingCoins)
         {
-            activeCoins.Add(new CoinInstance(coinTemplate));
+            var coinInstance = new CoinInstance(coinTemplate);
+            activeCoins.Add(coinInstance);
+            coinInstance.gimmick.RegisterEvents(this);
         }
     }
 
     // Event delegates
-    public event Action<CoinEventType, CoinData, float> OnCoinEvent;
+    public event Action<CoinEventType, CoinInstance, float> OnCoinEvent;
+    public void CoinEventBeforeCoinFlip(CoinInstance coinInstance)
+    {
+        OnCoinEvent?.Invoke(CoinEventType.BeforeCoinFlip, coinInstance, coinInstance.CoinValue);
+    }
+    public void CoinEventFlipEnd(CoinInstance coinInstance)
+    {
+        OnCoinEvent?.Invoke(CoinEventType.OnFlipEnd, coinInstance, coinInstance.CoinValue);
+    }
+
+    public void FlipAllCoinsDebug()
+    {
+        FlipAllCoins();
+    }
 
     public void FlipAllCoins(CoinInstance singleCoin = null)
     {
-        float totalPoints = 0;
         List<CoinInstance> flippingCoins;
 
         // TO DO: REMOVE THIS PIECE OF SHIT LATER
@@ -48,47 +93,51 @@ public class CoinManager : MonoBehaviour
 
         foreach (var coin in flippingCoins)
         {
-            float result = FlipCoin(coin);
-            if (coin.gimmick)
-            {
-                Debug.Log($"{coin.coinName} with gimmick <color=green>{coin.gimmick.name}</color> flipped {coin.lastFlippedState} gave {result} points!");
-            }
-            else
-            {
-                Debug.Log($"{coin.coinName} flipped {coin.lastFlippedState.ToString()} gave {result} points!");
-            }
-            totalPoints += result;
+            CurrentFlippingCoin = coin;
+
+            FlipCoin(coin);
+
+            Debug.Log(coin.FlippedDebugText());
         }
 
         OnCoinEvent?.Invoke(CoinEventType.OnAllCoinsFlipped, null, 0);
 
-        Debug.Log($"Total points: {totalPoints}");
+        Debug.Log($"Total points: {flippingCoins.Sum(c => c.CoinValue)}");
     }
 
     public float FlipCoin(CoinInstance coin)
     {
-        // Step 1: Odds
-        float headsChance = coin.gimmick ? coin.gimmick.AdjustHeadsChance(coin.headsChance) : coin.headsChance;
-        bool isHeads = UnityEngine.Random.value < headsChance;
-        coin.SetFlippedState(isHeads ? CoinInstance.flippedState.Heads : CoinInstance.flippedState.Tails);
+        // Flipping the coin
+        coin.FlipCoin(this);
 
-        // Step 2: Base Value
-        float value = isHeads ? coin.headsValue : coin.tailsValue;
-
-        // Step 3: Apply Multiplier
-        if (coin.multiplier)
-            value = isHeads ? coin.multiplier.ApplyHeads(value) : coin.multiplier.ApplyTails(value);
-
-        // Step 4: Apply Gimmick effect
-        if (coin.gimmick)
-            value = coin.gimmick.ApplyEffect(value, isHeads, this);
-
-        return value;
+        return coin.CoinValue;
     }
 
-    public void ReflipAllExceptCurrent(CoinEventType type, CoinData coin, float value)
+    //TODO: Fix this later to like actually do stuff
+    public void ReflipAllBeforeCurrent(CoinEventType type, CoinInstance coin, float value)
     {
-        Debug.Log("Reflipping all other coins...");
+        Debug.Log("Reflipping previous coins...");
+
+        foreach (var c in activeCoins)
+        {
+            if (c == coin)
+                return;
+
+            FlipCoin(c);
+            Debug.Log(c.FlippedDebugText());
+        }
+    }
+
+    //TODO: Fix this later to like actually choose and reflip coin
+    public void RetossAlreadyFlippedCoin(CoinInstance coin)
+    {
+        Debug.Log("Reflipping one of your coins...");
+    }
+
+    //TODO: Fix this later for jackpot!!
+    public void Jackpot(CoinInstance coin)
+    {
+        Debug.Log("Jackpot Hit...");
     }
 
     public void FlipSingleCoin(CoinData coin, MultiplierData multiplierData, GimmickData gimmickData)
@@ -96,6 +145,8 @@ public class CoinManager : MonoBehaviour
         singleCoinDebug = new CoinInstance(coin);
         singleCoinDebug.multiplier = multiplierData;
         singleCoinDebug.gimmick = gimmickData;
+
+        coin.gimmick.RegisterEvents(this);
 
         FlipAllCoins(singleCoinDebug);
     }

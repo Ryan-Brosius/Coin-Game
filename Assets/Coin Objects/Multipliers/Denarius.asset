@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   multiplierName: Denarius
   multiplierDescription: 
-  headsMultiplier: 2
-  tailsMultiplier: 0.5
+  headsMultiplier: 3
+  tailsMultiplier: 0.33

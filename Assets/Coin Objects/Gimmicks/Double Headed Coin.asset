@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9ef1e0116cc1964790a4b9e0de82a75, type: 3}
-  m_Name: Paper Coin
+  m_Name: Double Headed Coin
   m_EditorClassIdentifier: 
-  gimmickName: Paper Coin
+  gimmickName: Double Headed
   gimmickDescription: 
   effects:
   - {fileID: 11400000, guid: aecd9775957111346b1aa3fa42d526a0, type: 2}
-  - {fileID: 11400000, guid: 620c0721514a9734dbfc54e50518b73e, type: 2}
+  - {fileID: 11400000, guid: 9abb82c7742971d49a9dc7cff194a34f, type: 2}
+  rarity: 0

@@ -3,11 +3,14 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Coins/GimmickEffects/Heavy")]
 public class HeavyCoinEffect : GimmickEffect
 {
-    public override void OnCoinEvent(CoinEventType type, CoinData coin, float value, CoinManager manager)
+    public override void OnCoinEvent(CoinEventType type, CoinInstance coin, float value, CoinManager manager)
     {
-        if (type == CoinEventType.OnFlipEnd && coin.gimmick == this)
+        if (!manager.OnCoinEventCalledFromCurrentFlippingCoin(coin))
+            return;
+
+        if (type == CoinEventType.OnFlipEnd && coin.gimmick.effects.Contains(this))
         {
-            manager.ReflipAllExceptCurrent(type, coin, value);
+            manager.ReflipAllBeforeCurrent(type, coin, value);
         }
     }
 }

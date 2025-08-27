@@ -856,11 +856,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingCoins:
-  - {fileID: 11400000, guid: 75b7f0d4a527e5d48be9be5932a1c53a, type: 2}
-  - {fileID: 11400000, guid: bf0af63db2871d24b99288894d1059ac, type: 2}
-  - {fileID: 11400000, guid: 60c18d6d887a4ef41916ddb6de590e6e, type: 2}
-  - {fileID: 11400000, guid: ddbb8c5de3b3ea74fbb82050f0209e2a, type: 2}
-  - {fileID: 11400000, guid: 67c22c5408e142a4491085e1e0d5f0fb, type: 2}
+  - {fileID: 11400000, guid: cf4eccccebd9eb94d8bf154f0cf4adc9, type: 2}
+  - {fileID: 11400000, guid: cf4eccccebd9eb94d8bf154f0cf4adc9, type: 2}
+  - {fileID: 11400000, guid: cf4eccccebd9eb94d8bf154f0cf4adc9, type: 2}
+  - {fileID: 11400000, guid: eb08e5f583f01234cb33a045a0c84b1d, type: 2}
   gimmicks:
   - {fileID: 11400000, guid: e347d3ced41a1624ab2711653d2e6992, type: 2}
   - {fileID: 11400000, guid: 8de767592ec066842b08794acb9492b2, type: 2}
@@ -1694,7 +1693,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 362208067}
         m_TargetAssemblyTypeName: CoinManager, Assembly-CSharp
-        m_MethodName: FlipAllCoins
+        m_MethodName: FlipAllCoinsDebug
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2798,12 +2797,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropdown: {fileID: 1553221708}
   gimmicks:
+  - {fileID: 11400000, guid: 357bee57e7961264eb55a4192bbb5957, type: 2}
   - {fileID: 11400000, guid: e347d3ced41a1624ab2711653d2e6992, type: 2}
-  - {fileID: 11400000, guid: 8de767592ec066842b08794acb9492b2, type: 2}
-  - {fileID: 11400000, guid: 76920655aec4ce24b9e8e45bb16a63fe, type: 2}
-  - {fileID: 11400000, guid: 87c0a6f0cba7e05448e88fd034fec3ed, type: 2}
-  - {fileID: 11400000, guid: fb0c14e8be7cff843ad24f3b7c9ff109, type: 2}
-  - {fileID: 11400000, guid: 7f36d07e5f0856a47bbc3e9a1e09c2c3, type: 2}
+  - {fileID: 11400000, guid: 23db8a2dc743c724ab7afaf034a2e85a, type: 2}
+  - {fileID: 11400000, guid: 7e0c070831ba57e409f34c3184fc8f55, type: 2}
+  - {fileID: 11400000, guid: 0c3524068ebc8c149b9960492c3012ef, type: 2}
+  - {fileID: 11400000, guid: f8d24ec1be89e0f4088b36bf098e04cd, type: 2}
 --- !u!1 &1684414326
 GameObject:
   m_ObjectHideFlags: 0

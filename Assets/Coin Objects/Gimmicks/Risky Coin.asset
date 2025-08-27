@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9ef1e0116cc1964790a4b9e0de82a75, type: 3}
-  m_Name: Jackpot Coin
+  m_Name: Risky Coin
   m_EditorClassIdentifier: 
-  gimmickName: Jackpot
+  gimmickName: Risky
   gimmickDescription: 
   effects:
-  - {fileID: 11400000, guid: 9568afde09d7c3044841c0f3933fd562, type: 2}
-  - {fileID: 11400000, guid: e9ed8e09f7d78414f9bdd149709c66e7, type: 2}
-  rarity: 2
+  - {fileID: 11400000, guid: 631545255f9161e49801e8ebba5083ca, type: 2}
+  - {fileID: 11400000, guid: ac415474ef2894641a5b7c5f44b3fcc1, type: 2}
+  rarity: 0

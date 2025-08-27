@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Always Heads Coin
   m_EditorClassIdentifier: 
   gimmickName: Always Heads
-  gimmickDescription: Debug item
+  gimmickDescription: Debug item PLEASE DONT USE IN GAME
   effects:
   - {fileID: 11400000, guid: aecd9775957111346b1aa3fa42d526a0, type: 2}
   - {fileID: 11400000, guid: 8e0c9fc311964864180827a51050e84a, type: 2}
