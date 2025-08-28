@@ -18,11 +18,13 @@ public class CoinInstance
     private float currentTailsValue;
     public float currentHeadsChance;
 
-    private float currentValue;
+    public float currentValue;
     public float CoinValue => currentValue;
 
     public MultiplierData multiplier;
     public GimmickData gimmick;
+
+    public bool debuffed = false;
 
     public string CoinName
     {
@@ -75,10 +77,22 @@ public class CoinInstance
             gimmick = null;
     }
 
+    public void ResetCoinChances()
+    {
+        currentHeadsChance = 0;
+    }
+
+    public void PrepareCoinChances(CoinManager coinManager)
+    {
+        currentHeadsChance += (gimmick && !debuffed) ? gimmick.AdjustHeadsChance(baseHeadsChance) : baseHeadsChance;
+        coinManager.CoinEventBeforeCoinFlip(this);
+
+        // After all modifiers are made keep it between 0 - 1 :')
+        currentHeadsChance = Mathf.Clamp01(currentHeadsChance);
+    }
+
     public void FlipCoin(CoinManager coinManager)
     {
-        currentHeadsChance = gimmick ? gimmick.AdjustHeadsChance(baseHeadsChance) : baseHeadsChance;
-        coinManager.CoinEventBeforeCoinFlip(this);
         bool isHeads = UnityEngine.Random.value < currentHeadsChance;
 
         lastFlippedState = isHeads ? CoinInstance.flippedState.Heads : CoinInstance.flippedState.Tails;
@@ -88,7 +102,7 @@ public class CoinInstance
         if (multiplier)
             currentValue = isHeads ? multiplier.ApplyHeads(currentValue) : multiplier.ApplyTails(currentValue);
 
-        if (gimmick)
+        if (gimmick && !debuffed)
             currentValue = gimmick.ApplyEffect(currentValue, isHeads, coinManager, this);
 
         coinManager.CoinEventFlipEnd(this);
@@ -97,5 +111,20 @@ public class CoinInstance
     public string FlippedDebugText()
     {
         return $"<color=green>{CoinName}</color> flipped {lastFlippedState} gave {CoinValue} points!";
+    }
+
+    public string FlippedDebugInfo()
+    {
+        return
+            $"<b><color=yellow>[Coin Debug Info]</color></b>\n" +
+            $"Name: <color=green>{CoinName}</color>\n" +
+            $"Last Flip: {lastFlippedState}\n" +
+            $"Base Heads Value: {baseHeadsValue}\n" +
+            $"Base Tails Value: {baseTailsValue}\n" +
+            $"Base Heads Chance: {baseHeadsChance * 100f}%\n" +
+            $"Current Heads Chance: {currentHeadsChance * 100f}%\n" +
+            $"Current Coin Value: {currentValue}\n" +
+            $"Multiplier: {(multiplier != null ? multiplier.name : "None")}\n" +
+            $"Gimmick: {(gimmick != null ? gimmick.name : "None")}\n";
     }
 }

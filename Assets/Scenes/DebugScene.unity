@@ -856,10 +856,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingCoins:
-  - {fileID: 11400000, guid: cf4eccccebd9eb94d8bf154f0cf4adc9, type: 2}
-  - {fileID: 11400000, guid: cf4eccccebd9eb94d8bf154f0cf4adc9, type: 2}
-  - {fileID: 11400000, guid: cf4eccccebd9eb94d8bf154f0cf4adc9, type: 2}
-  - {fileID: 11400000, guid: eb08e5f583f01234cb33a045a0c84b1d, type: 2}
+  - {fileID: 11400000, guid: 75b7f0d4a527e5d48be9be5932a1c53a, type: 2}
+  - {fileID: 11400000, guid: 75b7f0d4a527e5d48be9be5932a1c53a, type: 2}
+  - {fileID: 11400000, guid: 75b7f0d4a527e5d48be9be5932a1c53a, type: 2}
+  - {fileID: 11400000, guid: 75b7f0d4a527e5d48be9be5932a1c53a, type: 2}
+  - {fileID: 11400000, guid: 75b7f0d4a527e5d48be9be5932a1c53a, type: 2}
   gimmicks:
   - {fileID: 11400000, guid: e347d3ced41a1624ab2711653d2e6992, type: 2}
   - {fileID: 11400000, guid: 8de767592ec066842b08794acb9492b2, type: 2}
@@ -867,6 +868,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 87c0a6f0cba7e05448e88fd034fec3ed, type: 2}
   - {fileID: 11400000, guid: fb0c14e8be7cff843ad24f3b7c9ff109, type: 2}
   - {fileID: 11400000, guid: 7f36d07e5f0856a47bbc3e9a1e09c2c3, type: 2}
+  activeRoundRule: {fileID: 11400000, guid: 4778d4485009f514386c17c5cf9b7a1a, type: 2}
 --- !u!4 &362208068
 Transform:
   m_ObjectHideFlags: 0
