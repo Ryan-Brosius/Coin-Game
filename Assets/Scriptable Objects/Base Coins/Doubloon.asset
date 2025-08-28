@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be51a5b0ed7db6b41a9deefe9b9e7bae, type: 3}
-  m_Name: Commemorative Penny
+  m_Name: Doubloon
   m_EditorClassIdentifier: 
-  coinName: Penny
-  coinDescription: This is a penny
+  coinName: Doubloon
+  coinDescription: 
   headsValue: 1
   tailsValue: 0
+  coinPrefab: {fileID: 7370877472278293349, guid: 236fda0022612ba47ad7d9bdd3e5e3ce, type: 3}
   headsChance: 0.5
-  multiplier: {fileID: 0}
-  gimmick: {fileID: 11400000, guid: 604be4b97576db942b5c330094ff152f, type: 2}
+  multiplier: {fileID: 11400000, guid: e174878000983d747aaffa21a6b7b602, type: 2}
+  gimmick: {fileID: 0}

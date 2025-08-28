@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be51a5b0ed7db6b41a9deefe9b9e7bae, type: 3}
-  m_Name: Heavy Penny
+  m_Name: Sestertius
   m_EditorClassIdentifier: 
-  coinName: Penny
-  coinDescription: This is a penny
+  coinName: Sestertius
+  coinDescription: 
   headsValue: 1
   tailsValue: 0
+  coinPrefab: {fileID: 8609954981631837546, guid: 344793624bbff4247a20158769195851, type: 3}
   headsChance: 0.5
-  multiplier: {fileID: 0}
-  gimmick: {fileID: 11400000, guid: 7a21d2e49d7991642be30c3f853b951b, type: 2}
+  multiplier: {fileID: 11400000, guid: eeffe6831f595d043836d6f935feccb5, type: 2}
+  gimmick: {fileID: 0}

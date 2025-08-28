@@ -20,6 +20,8 @@ public class CoinInstance
 
     public float currentValue;
     public float CoinValue => currentValue;
+    public GameObject CoinPrefab => template.coinPrefab;
+    public GameObject MyGameobject;
 
     public MultiplierData multiplier;
     public GimmickData gimmick;

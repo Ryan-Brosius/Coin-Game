@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be51a5b0ed7db6b41a9deefe9b9e7bae, type: 3}
-  m_Name: Penny
+  m_Name: Aureus
   m_EditorClassIdentifier: 
-  coinName: Penny
-  coinDescription: This is a penny
+  coinName: Aureus
+  coinDescription: 
   headsValue: 1
   tailsValue: 0
-  coinPrefab: {fileID: 4053723000787623798, guid: 625aebbabf178174ba6a1765218c20dc, type: 3}
+  coinPrefab: {fileID: 8700944790286505436, guid: c77478016dd88c642b16b95b8bab6469, type: 3}
   headsChance: 0.5
-  multiplier: {fileID: 0}
+  multiplier: {fileID: 11400000, guid: bd177600eecbe0348b8a84ccf731fb48, type: 2}
   gimmick: {fileID: 0}

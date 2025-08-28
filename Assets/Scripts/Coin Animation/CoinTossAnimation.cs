@@ -57,6 +57,10 @@ public class CoinTossAnimation : MonoBehaviour
     // Animation to toss coin
     public void TossCoin(Vector3 target)
     {
+        RoundManager.Instance.FlipCoinUsingGameobjectReference(gameObject);
+        var coinInstance = RoundManager.Instance.GetCoinInstanceFromGameObject(gameObject);
+        SetLandingFace((LandingFace)(int)coinInstance.lastFlippedState);    // XD I LOVE THIS
+
         Vector3 targetRotation = Vector3.right * 360f * rotationNumber;
         meshTransform.DOLocalRotate(targetRotation, jumpDuration, RotateMode.FastBeyond360).SetEase(Ease.Linear);
         

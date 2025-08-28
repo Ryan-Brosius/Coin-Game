@@ -1,4 +1,5 @@
 using UnityEngine;
+using static CoinInstance;
 
 [CreateAssetMenu(fileName = "MultiplierData", menuName = "Coins/Multiplier")]
 public class MultiplierData : ScriptableObject
@@ -10,4 +11,9 @@ public class MultiplierData : ScriptableObject
 
     public float ApplyHeads(float baseValue) => baseValue * headsMultiplier;
     public float ApplyTails(float baseValue) => baseValue * tailsMultiplier;
+
+    public float GetMultiplier(bool isHeads)
+    {
+        return isHeads ? headsMultiplier : tailsMultiplier;
+    }
 }

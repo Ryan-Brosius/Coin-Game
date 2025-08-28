@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be51a5b0ed7db6b41a9deefe9b9e7bae, type: 3}
-  m_Name: Arcade Penny
+  m_Name: Tongbao
   m_EditorClassIdentifier: 
-  coinName: Penny
-  coinDescription: This is a penny
+  coinName: Tongbao
+  coinDescription: 
   headsValue: 1
   tailsValue: 0
+  coinPrefab: {fileID: 7202982019379884419, guid: 019fb25d6c4123446b5615be99b9dc48, type: 3}
   headsChance: 0.5
-  multiplier: {fileID: 0}
-  gimmick: {fileID: 11400000, guid: 4d6e098f96f30e648b8a6e127ca01e76, type: 2}
+  multiplier: {fileID: 11400000, guid: f600a5da1f2bc9d49821e3357fcc45e1, type: 2}
+  gimmick: {fileID: 0}

@@ -16,6 +16,7 @@ MonoBehaviour:
   coinDescription: This is a dollar
   headsValue: 100
   tailsValue: 0
+  coinPrefab: {fileID: 5466836357223778293, guid: ba3d7714d52b7894b901b4f0928c1ad0, type: 3}
   headsChance: 0.5
   multiplier: {fileID: 0}
   gimmick: {fileID: 0}

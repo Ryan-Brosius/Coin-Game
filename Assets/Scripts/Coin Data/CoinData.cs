@@ -8,6 +8,8 @@ public class CoinData : ScriptableObject
     public float headsValue;
     public float tailsValue;
 
+    public GameObject coinPrefab;
+
     [Range(0f, 1f)] public float headsChance = 0.5f; // 50/50 default :p
 
     // If these are null then they just dont exist for this LOL!!!

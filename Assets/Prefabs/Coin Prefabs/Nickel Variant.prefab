@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -7021828688287437950, guid: cb922747e45145148866b9ec5a3550b7, type: 3}
+      propertyPath: canToss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7021828688287437950, guid: cb922747e45145148866b9ec5a3550b7, type: 3}
       propertyPath: isHeads
       value: 1
       objectReference: {fileID: 0}

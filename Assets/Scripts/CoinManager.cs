@@ -10,9 +10,27 @@ public class CoinManager : MonoBehaviour
     // The reasoning for this is it could be helpful for certain aspects for callback, like when things get re-flipped
     // but an too lazy at the moment and dont need to worry about it
 
+    public static CoinManager Instance { get; private set; }
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+    }
+
     [Header("Starting Coins (Templates)")]
     public List<CoinData> startingCoins;
     public List<CoinInstance> activeCoins = new List<CoinInstance>();
+    public List<CoinInstance> flippedOrder = new List<CoinInstance>();
+
     private int maxFlips = 10;
     public int currentMaxFlips;
 
@@ -138,11 +156,18 @@ public class CoinManager : MonoBehaviour
 
     public float FlipCoin(CoinInstance coin)
     {
+
         coin.ResetCoinChances();
-        activeRoundRule.OnBeforeCoinFlip(this, coin);
+        activeRoundRule?.OnBeforeCoinFlip(this, coin);   
         coin.PrepareCoinChances(this);
         coin.FlipCoin(this);
-        activeRoundRule.OnAfterCoinFlip(this, coin);
+        activeRoundRule?.OnAfterCoinFlip(this, coin);
+
+        flippedOrder.Add(coin);
+
+        Debug.Log(coin.FlippedDebugText());
+        Debug.Log(coin.FlippedDebugInfo());
+        Debug.Log($"Total points: {GetCurrentTotalRoundScore()}");
 
         return coin.CoinValue;
     }
@@ -183,5 +208,24 @@ public class CoinManager : MonoBehaviour
         coin.gimmick.RegisterEvents(this);
 
         FlipAllCoins(singleCoinDebug);
+    }
+
+    public float GetCurrentTotalRoundScore()
+    {
+        float score = 0;
+
+        foreach (var coin in flippedOrder)
+        {
+            if (!coin.multiplier)
+            {
+                score += coin.CoinValue;
+            }
+            else
+            {
+                score *= coin.multiplier.GetMultiplier(coin.lastFlippedState == CoinInstance.flippedState.Heads);
+            }
+        }
+
+        return score;
     }
 }

@@ -16,7 +16,7 @@ MonoBehaviour:
   coinDescription: This is a nickel
   headsValue: 5
   tailsValue: 0
-  lastFlippedState: 0
+  coinPrefab: {fileID: 7498121796156892940, guid: 39f8d8b99ec4ca3419321ad0ad21e8bc, type: 3}
   headsChance: 0.5
   multiplier: {fileID: 0}
   gimmick: {fileID: 0}
