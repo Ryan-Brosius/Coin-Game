@@ -1,34 +1,47 @@
 using DG.Tweening;
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class CoinTossAnimation : MonoBehaviour
 {
+    [Header ("References")]
     [SerializeField] Transform meshTransform;
-    [SerializeField] Transform benchPosition;
+    [SerializeField] Vector3 benchPosition;
+    [SerializeField] bool canToss;
+
+    [Header("Animation Values")]
     [SerializeField] float jumpPower = 1;
     [SerializeField] float jumpDuration = 1;
     [SerializeField] float tumblePower = 45;
     [SerializeField] float tumbleDuration = 1f;
     [SerializeField] float rotationNumber = 5f;
     [SerializeField] float coinHeight;
+
+    [Header("Placeholder Stuff")]
     public bool isHeads;
     public bool isSide;
+
     bool isTossing;
     bool isTumbling;
     Vector3 initialRotation;
 
-    public Transform tempTarget;
-
     private void Awake()
     {
         if (meshTransform == null) this.transform.Find("Coin Mesh");
+        benchPosition = transform.position;
         initialRotation = meshTransform.rotation.eulerAngles;
+        gameObject.SetActive(false);
     }
 
     private void OnMouseDown()
     {
-        TossCoin(tempTarget.position);
+        if (canToss)
+        {
+            Transform target = RoundManager.Instance.GetCoinTarget();
+            TossCoin(target.position);
+            canToss = false;
+        }
     }
 
     public void TossCoin(Vector3 target)
@@ -36,6 +49,19 @@ public class CoinTossAnimation : MonoBehaviour
         Vector3 targetRotation = Vector3.right * 360f * rotationNumber;
         meshTransform.DOLocalRotate(targetRotation, jumpDuration, RotateMode.FastBeyond360).SetEase(Ease.Linear);
         transform.DOJump(target, jumpPower, 1, jumpDuration).SetEase(Ease.OutSine).OnComplete(LandCoin);
+    }
+
+    public void ReturnCoin()
+    {
+        if (transform.position == benchPosition && canToss) return;
+        Vector3 targetRotation = Vector3.right * 360f * rotationNumber;
+        meshTransform.DOLocalRotate(targetRotation, jumpDuration, RotateMode.FastBeyond360).SetEase(Ease.Linear);
+        transform.DOJump(benchPosition, jumpPower, 1, jumpDuration).SetEase(Ease.OutSine).OnComplete(() =>
+        {
+            LandOnHeads();
+            CoinTumble();
+        }); ;
+        canToss = true;
     }
 
     public void LandCoin()
@@ -65,6 +91,20 @@ public class CoinTossAnimation : MonoBehaviour
             });
         meshTransform.DOShakeRotation(tumbleDuration, tumblePower, 25).SetEase(Ease.OutSine);
     }
+
+    public void CoinStartAnimation()
+    {
+        gameObject.SetActive(true);
+        canToss = true;
+        Vector3 targetRotation = Vector3.right * 360f * (rotationNumber/2);
+        meshTransform.DOLocalRotate(targetRotation, jumpDuration, RotateMode.FastBeyond360).SetEase(Ease.Linear);
+        transform.DOJump(transform.position, jumpPower/2, 1, jumpDuration).SetEase(Ease.OutSine).OnComplete(() =>
+        {
+            LandOnHeads();
+            CoinTumble();
+        });
+    }
+
     private void LandOnHeads()
     {
         meshTransform.rotation = Quaternion.Euler(initialRotation.x, initialRotation.y + CoinRotationRandomness(), initialRotation.z);
