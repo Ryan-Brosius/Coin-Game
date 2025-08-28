@@ -59,25 +59,36 @@ public class CoinTossAnimation : MonoBehaviour
 
     public void CoinTumble()
     {
-        meshTransform.DOJump(transform.position, 0.1f, 1, tumbleDuration/3).SetEase(Ease.OutSine);
-        meshTransform.DOShakeRotation(tumbleDuration, tumblePower, 25);
+        meshTransform.DOJump(transform.position, 0.1f, 1, tumbleDuration/4).SetEase(Ease.OutSine)
+            .OnComplete(() => {
+                meshTransform.DOJump(transform.position, 0.05f, 1, tumbleDuration / 4).SetEase(Ease.OutSine);
+            });
+        meshTransform.DOShakeRotation(tumbleDuration, tumblePower, 25).SetEase(Ease.OutSine);
     }
     private void LandOnHeads()
     {
-        meshTransform.rotation = Quaternion.Euler(initialRotation.x, initialRotation.y, initialRotation.z);
+        meshTransform.rotation = Quaternion.Euler(initialRotation.x, initialRotation.y + CoinRotationRandomness(), initialRotation.z);
         if (meshTransform.position.y != 0f) meshTransform.localPosition = new Vector3(0, 0, 0);
     }
 
     private void LandOnTails()
     {
-        meshTransform.rotation = Quaternion.Euler(initialRotation.x + 180, initialRotation.y, initialRotation.z);
+        meshTransform.rotation = Quaternion.Euler(initialRotation.x + 180, initialRotation.y + CoinRotationRandomness(), initialRotation.z);
         if (meshTransform.position.y != 0f) meshTransform.localPosition = new Vector3(0, 0, 0);
     }
 
     private void LandOnSide()
     {
         meshTransform.localPosition = new Vector3(0f, coinHeight, 0f);
-        meshTransform.DOJump(meshTransform.position, 0.1f, 1, tumbleDuration / 3).SetEase(Ease.OutSine);
-        meshTransform.rotation = Quaternion.Euler(0, 30, 30);
+        meshTransform.DOJump(meshTransform.position, 0.5f, 1, tumbleDuration / 4).SetEase(Ease.OutSine)
+            .OnComplete(() => {
+                meshTransform.DOJump(meshTransform.position, 0.25f, 1, tumbleDuration / 4).SetEase(Ease.OutSine);
+            });
+        meshTransform.DOLocalRotate(new Vector3(0, 30, 30), tumbleDuration / 3);
+    }
+
+    private int CoinRotationRandomness()
+    {
+        return Random.Range(0, 360);
     }
 }

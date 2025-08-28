@@ -50,7 +50,7 @@ MonoBehaviour:
   benchPosition: {fileID: 0}
   jumpPower: 1.5
   jumpDuration: 0.75
-  tumblePower: 60
+  tumblePower: 40
   tumbleDuration: 0.75
   rotationNumber: 8
   coinHeight: 0.13
