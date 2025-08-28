@@ -24,6 +24,15 @@ public class CoinManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+
+        foreach (var coinTemplate in startingCoins)
+        {
+            var coinInstance = new CoinInstance(coinTemplate);
+            activeCoins.Add(coinInstance);
+
+            if (coinInstance.gimmick)
+                coinInstance.gimmick.RegisterEvents(this);
+        }
     }
 
     [Header("Starting Coins (Templates)")]
@@ -86,15 +95,6 @@ public class CoinManager : MonoBehaviour
     private void Start()
     {
         currentMaxFlips = maxFlips;
-
-        foreach (var coinTemplate in startingCoins)
-        {
-            var coinInstance = new CoinInstance(coinTemplate);
-            activeCoins.Add(coinInstance);
-
-            if (coinInstance.gimmick)
-                coinInstance.gimmick.RegisterEvents(this);
-        }
     }
 
     private void StartRound()
