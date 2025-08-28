@@ -18,6 +18,15 @@ public class CoinTossAnimation : MonoBehaviour
     [SerializeField] float rotationNumber = 5f;
     [SerializeField] float coinHeight;
 
+    public enum LandingFace
+    {
+        Heads,
+        Tails,
+        Side
+    }
+
+    public LandingFace currentFace;
+
     [Header("Placeholder Stuff")]
     public bool isHeads;
     public bool isSide;
@@ -32,6 +41,7 @@ public class CoinTossAnimation : MonoBehaviour
         benchPosition = transform.position;
         initialRotation = meshTransform.rotation.eulerAngles;
         gameObject.SetActive(false);
+        currentFace = LandingFace.Heads;
     }
 
     private void OnMouseDown()
@@ -44,13 +54,17 @@ public class CoinTossAnimation : MonoBehaviour
         }
     }
 
+    // Animation to toss coin
     public void TossCoin(Vector3 target)
     {
         Vector3 targetRotation = Vector3.right * 360f * rotationNumber;
         meshTransform.DOLocalRotate(targetRotation, jumpDuration, RotateMode.FastBeyond360).SetEase(Ease.Linear);
+        
+        // Jumps to the target location and calls function to rotate to the correct coin face upon landing
         transform.DOJump(target, jumpPower, 1, jumpDuration).SetEase(Ease.OutSine).OnComplete(LandCoin);
     }
 
+    // Returns the coin back to the coin bench
     public void ReturnCoin()
     {
         if (transform.position == benchPosition && canToss) return;
@@ -64,19 +78,26 @@ public class CoinTossAnimation : MonoBehaviour
         canToss = true;
     }
 
+    // Used to set the landing face of the coin
+    public void SetLandingFace(LandingFace faceToLand)
+    {
+        currentFace = faceToLand;
+    }
+
+    // Updates the rotation of the coin based on the side it is landing on
     public void LandCoin()
     {
-        if (isSide)
+        if (currentFace == LandingFace.Side)
         {
             LandOnSide();
             return;
         }
-        if (isHeads)
+        if (currentFace == LandingFace.Heads)
         {
             LandOnHeads();
             CoinTumble();
         }
-        else
+        else if (currentFace == LandingFace.Tails)
         {
             LandOnTails();
             CoinTumble();
@@ -130,5 +151,10 @@ public class CoinTossAnimation : MonoBehaviour
     private int CoinRotationRandomness()
     {
         return Random.Range(0, 360);
+    }
+
+    public bool CanBeTossed()
+    {
+        return canToss;
     }
 }
