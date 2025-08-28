@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using UnityEngine;
 
@@ -11,7 +12,9 @@ public class CoinManager : MonoBehaviour
 
     [Header("Starting Coins (Templates)")]
     public List<CoinData> startingCoins;
-    private List<CoinInstance> activeCoins = new List<CoinInstance>();
+    public List<CoinInstance> activeCoins = new List<CoinInstance>();
+    private int maxFlips = 10;
+    public int currentMaxFlips;
 
     public CoinInstance CurrentFlippingCoin;
     public CoinInstance NextFlippingCoin
@@ -51,14 +54,39 @@ public class CoinManager : MonoBehaviour
 
     //public Dictionary<CoinData, float> pointsMap = new Dictionary<CoinData, float>();
 
+    [Header("Round Rules")]
+    public LaundryRule activeRoundRule;
+
+
+    ///////////////////////////////////////////////////
+    //// THIS IS WHERE THE CODE FOR THE ACTUAL GAME ///
+    ///                  STARTS!!!                  ///
+    ///////////////////////////////////////////////////
+
+
+    //TODO MOVE THIS INTO SOMETHING ELSE LATER SO WE HAVE SOME SORT OF FLOW
     private void Start()
     {
+        currentMaxFlips = maxFlips;
+
         foreach (var coinTemplate in startingCoins)
         {
             var coinInstance = new CoinInstance(coinTemplate);
             activeCoins.Add(coinInstance);
-            coinInstance.gimmick.RegisterEvents(this);
+
+            if (coinInstance.gimmick)
+                coinInstance.gimmick.RegisterEvents(this);
         }
+    }
+
+    private void StartRound()
+    {
+        activeRoundRule.OnRoundStart(this);
+    }
+
+    private void EndRound()
+    {
+        activeRoundRule.OnRoundEnd(this);
     }
 
     // Event delegates
@@ -79,6 +107,7 @@ public class CoinManager : MonoBehaviour
 
     public void FlipAllCoins(CoinInstance singleCoin = null)
     {
+        StartRound();
         List<CoinInstance> flippingCoins;
 
         // TO DO: REMOVE THIS PIECE OF SHIT LATER
@@ -98,17 +127,22 @@ public class CoinManager : MonoBehaviour
             FlipCoin(coin);
 
             Debug.Log(coin.FlippedDebugText());
+            Debug.Log(coin.FlippedDebugInfo());
         }
 
         OnCoinEvent?.Invoke(CoinEventType.OnAllCoinsFlipped, null, 0);
 
         Debug.Log($"Total points: {flippingCoins.Sum(c => c.CoinValue)}");
+        EndRound();
     }
 
     public float FlipCoin(CoinInstance coin)
     {
-        // Flipping the coin
+        coin.ResetCoinChances();
+        activeRoundRule.OnBeforeCoinFlip(this, coin);
+        coin.PrepareCoinChances(this);
         coin.FlipCoin(this);
+        activeRoundRule.OnAfterCoinFlip(this, coin);
 
         return coin.CoinValue;
     }
