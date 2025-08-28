@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4324433203915186455}
   - component: {fileID: -7021828688287437950}
+  - component: {fileID: 3327221031400553435}
   - component: {fileID: 1665072390367354562}
   m_Layer: 0
   m_Name: Coin Parent
@@ -47,16 +48,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshTransform: {fileID: 6575340776331760575}
-  benchPosition: {fileID: 0}
+  benchPosition: {x: 0, y: 0, z: 0}
+  canToss: 0
   jumpPower: 1.5
   jumpDuration: 0.75
   tumblePower: 40
   tumbleDuration: 0.75
   rotationNumber: 8
   coinHeight: 0.13
+  currentFace: 0
   isHeads: 1
   isSide: 0
-  tempTarget: {fileID: 0}
+--- !u!114 &3327221031400553435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351864803018261198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf71f413fa167f44097321b7e549629f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMaterial: {fileID: 2100000, guid: bcb3c3abdb3f2374b9e478b58e281a46, type: 2}
+  animationScript: {fileID: -7021828688287437950}
+  coinMesh: {fileID: 5956357163844198921}
 --- !u!65 &1665072390367354562
 BoxCollider:
   m_ObjectHideFlags: 0
