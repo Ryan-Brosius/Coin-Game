@@ -14,7 +14,7 @@ public class CoinPopupController : MonoBehaviour
         if (coinInfo.multiplier != null)
         {
             headsText.text = (headsChance).ToString() + "% for " + (coinInfo.GetMultiplierValue(true)).ToString() + "x";
-            tailsText.text = (100 - (headsChance)).ToString() + "% for " + (coinInfo.GetMultiplierValue(true)).ToString() + "x";
+            tailsText.text = (100 - (headsChance)).ToString() + "% for " + (coinInfo.GetMultiplierValue(false)).ToString() + "x";
         }
         else
         {
