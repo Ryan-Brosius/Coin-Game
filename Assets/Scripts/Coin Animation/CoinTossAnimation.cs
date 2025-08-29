@@ -106,6 +106,8 @@ public class CoinTossAnimation : MonoBehaviour
             LandOnTails();
             CoinTumble();
         }
+
+        RoundManager.Instance.CoinFlipAnimationEnd(gameObject);
     }
 
     public void CoinTumble()

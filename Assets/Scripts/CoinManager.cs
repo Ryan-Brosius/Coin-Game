@@ -97,14 +97,16 @@ public class CoinManager : MonoBehaviour
         currentMaxFlips = maxFlips;
     }
 
-    private void StartRound()
+    public void StartRound()
     {
-        activeRoundRule.OnRoundStart(this);
+        flippedOrder.Clear();
+        activeRoundRule?.OnRoundStart(this);
     }
 
-    private void EndRound()
+    public void EndRound()
     {
-        activeRoundRule.OnRoundEnd(this);
+        flippedOrder.Clear();
+        activeRoundRule?.OnRoundEnd(this);
     }
 
     // Event delegates

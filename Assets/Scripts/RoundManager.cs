@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -27,6 +28,24 @@ public class RoundManager : MonoBehaviour
     [SerializeField] float startTossDelay = 0.25f;
     [SerializeField] int currentToss = 0;
     [SerializeField] int maxTosses = 10;
+
+    private float _scoreToGet;
+    private float ScoreToGet
+    {
+        get => _scoreToGet;
+        set
+        {
+            _scoreToGet = value;
+            if (goalText != null)
+            {
+                goalText.text = $"{_scoreToGet}¢";
+            }
+        }
+    }
+
+    [Header("UI Elements")]
+    [SerializeField] private TextMeshProUGUI goalText;
+    [SerializeField] private TextMeshProUGUI currentScoreText;
 
     private void Start()
     {
@@ -57,15 +76,18 @@ public class RoundManager : MonoBehaviour
 
     public void RoundStart()
     {
+        GenerateScoreToGet();
         currentToss = 0;
+        CoinManager.Instance.StartRound();
         StartCoroutine(StartAnimation());
     }
 
     public void EndRound()
     {
         currentToss = 0;
+        CoinManager.Instance.EndRound();
         StartCoroutine(ReturnAnimation());
-
+        GenerateScoreToGet();
     }
 
     public IEnumerator StartAnimation()
@@ -116,5 +138,18 @@ public class RoundManager : MonoBehaviour
     {
         var index = Coins.IndexOf(coin);
         return coinManager.activeCoins[index];
+    }
+
+    private void GenerateScoreToGet()
+    {
+        currentScoreText.text = $"0¢";
+        System.Random random = new System.Random();
+        ScoreToGet = random.Next(10, 61) * 5;
+    }
+
+    // Helper that tells us a coin was just flipped
+    public void CoinFlipAnimationEnd(GameObject coin)
+    {
+        currentScoreText.text = $"{CoinManager.Instance.GetCurrentTotalRoundScore()}¢";
     }
 }
