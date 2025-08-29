@@ -7,7 +7,7 @@ public class ArcadeCoinEffect : GimmickEffect
     {
         if (isHeads)
         {
-            manager.RetossAlreadyFlippedCoin(coinInstance);
+            manager.AddRetoss(coinInstance);
         }
 
         return value;

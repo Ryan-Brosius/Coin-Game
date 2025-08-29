@@ -150,6 +150,7 @@ public class RoundManager : MonoBehaviour
     // Helper that tells us a coin was just flipped
     public void CoinFlipAnimationEnd(GameObject coin)
     {
+        coinManager.CoinEventFlipEnd(GetCoinInstanceFromGameObject(coin));
         currentScoreText.text = $"{CoinManager.Instance.GetCurrentTotalRoundScore()}¢";
     }
 }

@@ -107,7 +107,8 @@ public class CoinInstance
         if (gimmick && !debuffed)
             currentValue = gimmick.ApplyEffect(currentValue, isHeads, coinManager, this);
 
-        coinManager.CoinEventFlipEnd(this);
+        // Now exists in the animation
+        //coinManager.CoinEventFlipEnd(this);
     }
 
     public string FlippedDebugText()

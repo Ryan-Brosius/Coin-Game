@@ -158,14 +158,15 @@ public class CoinManager : MonoBehaviour
 
     public float FlipCoin(CoinInstance coin)
     {
+        CurrentFlippingCoin = coin; // bruh had a bug because I forgot about this :/
 
+        flippedOrder.Add(coin);
         coin.ResetCoinChances();
         activeRoundRule?.OnBeforeCoinFlip(this, coin);   
         coin.PrepareCoinChances(this);
         coin.FlipCoin(this);
         activeRoundRule?.OnAfterCoinFlip(this, coin);
 
-        flippedOrder.Add(coin);
 
         Debug.Log(coin.FlippedDebugText());
         Debug.Log(coin.FlippedDebugInfo());
@@ -179,20 +180,33 @@ public class CoinManager : MonoBehaviour
     {
         Debug.Log("Reflipping previous coins...");
 
-        foreach (var c in activeCoins)
+        void ReflipCoinHelper(CoinInstance coin)
+        {
+            coin.ResetCoinChances();
+            activeRoundRule?.OnBeforeCoinFlip(this, coin);
+            coin.PrepareCoinChances(this);
+            coin.FlipCoin(this);
+            activeRoundRule?.OnAfterCoinFlip(this, coin);
+        }
+
+        foreach (var c in flippedOrder)
         {
             if (c == coin)
                 return;
 
-            FlipCoin(c);
+
+            ReflipCoinHelper(c);
+            if (c.MyGameobject.TryGetComponent<CoinTossAnimation>(out CoinTossAnimation coinTossAnimation))
+                coinTossAnimation.RetossCoin();
+
             Debug.Log(c.FlippedDebugText());
         }
     }
 
     //TODO: Fix this later to like actually choose and reflip coin
-    public void RetossAlreadyFlippedCoin(CoinInstance coin)
+    public void AddRetoss(CoinInstance coin)
     {
-        Debug.Log("Reflipping one of your coins...");
+        Debug.Log("Adding a free retoss...");
     }
 
     //TODO: Fix this later for jackpot!!

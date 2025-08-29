@@ -11,7 +11,7 @@ public class LuckyCoinEffect : GimmickEffect
         if (UnityEngine.Random.value < edgeChance)
         {
             coinInstance.lastFlippedState = CoinInstance.flippedState.Side;
-            return value * multiplier;
+            return coinInstance.baseHeadsValue * multiplier;
         }
 
         return value;
