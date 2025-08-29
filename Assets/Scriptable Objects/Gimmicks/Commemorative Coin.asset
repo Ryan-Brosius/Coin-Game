@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Commemorative Coin
   m_EditorClassIdentifier: 
   gimmickName: Commemorative
-  gimmickDescription: 
+  gimmickDescription: On heads, next coin has 2x chance for Heads
   effects:
   - {fileID: 11400000, guid: 1f68fb3504827f14283ee5d333a59247, type: 2}
   rarity: 1

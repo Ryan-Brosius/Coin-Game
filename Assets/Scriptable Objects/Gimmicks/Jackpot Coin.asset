@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Jackpot Coin
   m_EditorClassIdentifier: 
   gimmickName: Jackpot
-  gimmickDescription: 
+  gimmickDescription: On heads, instantly win the round perfectly
   effects:
   - {fileID: 11400000, guid: 9568afde09d7c3044841c0f3933fd562, type: 2}
   - {fileID: 11400000, guid: e9ed8e09f7d78414f9bdd149709c66e7, type: 2}

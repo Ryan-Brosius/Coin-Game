@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lucky Coin
   m_EditorClassIdentifier: 
   gimmickName: Lucky
-  gimmickDescription: 
+  gimmickDescription: Chance to land on Side for 10x Heads value
   effects:
   - {fileID: 11400000, guid: 67990029d7c29f340a437621866b8fa9, type: 2}
   rarity: 0

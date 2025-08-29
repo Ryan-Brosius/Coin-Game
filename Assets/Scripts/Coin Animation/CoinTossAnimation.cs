@@ -169,7 +169,10 @@ public class CoinTossAnimation : MonoBehaviour
         if (scorePopup)
         {
             var coinInstance = RoundManager.Instance.GetCoinInstanceFromGameObject(gameObject);
-            scorePopup.HeadsPopup(coinInstance?.CoinValue ?? 0f, coinInstance.multiplier?.headsMultiplier ?? 0f, coinInstance?.multiplier ?? false);
+            scorePopup.HeadsPopup(
+                coinInstance?.CoinValue ?? 0f,
+                coinInstance.multiplier? coinInstance.GetMultiplierValue(true) : 0f,
+                coinInstance?.multiplier ?? false);
         }
     }
 
@@ -181,7 +184,10 @@ public class CoinTossAnimation : MonoBehaviour
         if (scorePopup)
         {
             var coinInstance = RoundManager.Instance.GetCoinInstanceFromGameObject(gameObject);
-            scorePopup.TailsPopup(coinInstance?.CoinValue ?? 0f, coinInstance.multiplier?.tailsMultiplier ?? 0f, coinInstance?.multiplier ?? false);
+            scorePopup.TailsPopup(
+                coinInstance?.CoinValue ?? 0f,
+                coinInstance.multiplier ? coinInstance.GetMultiplierValue(false) : 0f,
+                coinInstance?.multiplier ?? false);
         }
     }
 

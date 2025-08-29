@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Vintage Coin
   m_EditorClassIdentifier: 
   gimmickName: Vintage
-  gimmickDescription: 
+  gimmickDescription: "Guarantees an additional value of 30\xA2"
   effects:
   - {fileID: 11400000, guid: a292c50c7803c0d42ab98fdba474bb83, type: 2}
   rarity: 1

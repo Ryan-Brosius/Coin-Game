@@ -19,4 +19,4 @@ MonoBehaviour:
   coinPrefab: {fileID: 5073025579113913724, guid: 553d081cde4375546a0eedb0a611a147, type: 3}
   headsChance: 0.5
   multiplier: {fileID: 0}
-  gimmick: {fileID: 0}
+  gimmick: {fileID: 11400000, guid: f8d24ec1be89e0f4088b36bf098e04cd, type: 2}

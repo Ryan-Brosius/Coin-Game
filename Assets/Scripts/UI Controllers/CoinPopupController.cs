@@ -13,6 +13,7 @@ public class CoinPopupController : MonoBehaviour
         var headsChance = CoinManager.Instance.GetCoinChances(coinInfo) * 100f;
         if (coinInfo.multiplier != null)
         {
+            nameText.text = coinInfo.CoinName;
             headsText.text = (headsChance).ToString() + "% for " + (coinInfo.GetMultiplierValue(true)).ToString() + "x";
             tailsText.text = (100 - (headsChance)).ToString() + "% for " + (coinInfo.GetMultiplierValue(false)).ToString() + "x";
         }

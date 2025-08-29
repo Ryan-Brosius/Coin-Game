@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Arcade Coin
   m_EditorClassIdentifier: 
   gimmickName: Arcade
-  gimmickDescription: 
+  gimmickDescription: On heads, +1 retosses this round
   effects:
   - {fileID: 11400000, guid: a7b89ec65a8472b4185a78b23e9513c7, type: 2}
   rarity: 1

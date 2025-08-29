@@ -16,5 +16,4 @@ MonoBehaviour:
   gimmickDescription: 
   effects:
   - {fileID: 11400000, guid: fd3fa09c1abecd3409e00f434a01b84d, type: 2}
-  - {fileID: 11400000, guid: 7a1ee6e0857d9f24686802da328cf11a, type: 2}
   rarity: 1
