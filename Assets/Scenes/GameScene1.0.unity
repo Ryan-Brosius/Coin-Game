@@ -7630,6 +7630,79 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4324433203915186455, guid: cb922747e45145148866b9ec5a3550b7, type: 3}
   m_PrefabInstance: {fileID: 1581075879}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &733289913
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 618e3189ebecc99449e5f3853d97a6ce, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 260.50998
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 618e3189ebecc99449e5f3853d97a6ce, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 166.31216
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 618e3189ebecc99449e5f3853d97a6ce, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 260.50998
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 618e3189ebecc99449e5f3853d97a6ce, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.10230911
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 618e3189ebecc99449e5f3853d97a6ce, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.44
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 618e3189ebecc99449e5f3853d97a6ce, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.34
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 618e3189ebecc99449e5f3853d97a6ce, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 618e3189ebecc99449e5f3853d97a6ce, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 618e3189ebecc99449e5f3853d97a6ce, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 618e3189ebecc99449e5f3853d97a6ce, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 618e3189ebecc99449e5f3853d97a6ce, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 618e3189ebecc99449e5f3853d97a6ce, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 618e3189ebecc99449e5f3853d97a6ce, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 618e3189ebecc99449e5f3853d97a6ce, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 812203c48f0553b44a61f97a4a38b627, type: 2}
+    - target: {fileID: 919132149155446097, guid: 618e3189ebecc99449e5f3853d97a6ce, type: 3}
+      propertyPath: m_Name
+      value: laundromatsign
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 618e3189ebecc99449e5f3853d97a6ce, type: 3}
 --- !u!43 &748038927
 Mesh:
   m_ObjectHideFlags: 0
@@ -31590,6 +31663,8 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 7934516780942180550, guid: 4cc277cc162a5bc4db7c41dd8349a5f1, type: 3}
     - {fileID: 6045092473882325651, guid: 4cc277cc162a5bc4db7c41dd8349a5f1, type: 3}
+    - {fileID: 1779880252538138888, guid: 4cc277cc162a5bc4db7c41dd8349a5f1, type: 3}
+    - {fileID: 2686974156235293533, guid: 4cc277cc162a5bc4db7c41dd8349a5f1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cc277cc162a5bc4db7c41dd8349a5f1, type: 3}
@@ -31639,3 +31714,4 @@ SceneRoots:
   - {fileID: 1463374349}
   - {fileID: 9018180217613498108}
   - {fileID: 894451293}
+  - {fileID: 733289913}
