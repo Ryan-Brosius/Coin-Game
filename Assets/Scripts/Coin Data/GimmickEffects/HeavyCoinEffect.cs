@@ -8,7 +8,7 @@ public class HeavyCoinEffect : GimmickEffect
         if (!manager.OnCoinEventCalledFromCurrentFlippingCoin(coin))
             return;
 
-        if (type == CoinEventType.OnFlipEnd && coin.gimmick.effects.Contains(this))
+        if (type == CoinEventType.OnFlipEnd && coin.gimmick?.effects.Contains(this) == true)
         {
             manager.ReflipAllBeforeCurrent(type, coin, value);
         }
