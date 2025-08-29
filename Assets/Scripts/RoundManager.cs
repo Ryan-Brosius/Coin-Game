@@ -71,6 +71,7 @@ public class RoundManager : MonoBehaviour
             var coinGameobject = GameObject.Instantiate(CoinsRefs[i], coinsPos[i].transform.position, Quaternion.identity);
             Coins.Add(coinGameobject);
             coinManager.activeCoins[i].MyGameobject = coinGameobject;
+            coinGameobject.GetComponent<CoinTossAnimation>().InitializeCoinInfo();
         }
     }
 

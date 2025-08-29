@@ -9,6 +9,8 @@ public class CoinTossAnimation : MonoBehaviour
     [SerializeField] Transform meshTransform;
     [SerializeField] Vector3 benchPosition;
     [SerializeField] bool canToss;
+    [SerializeField] ScorePopupController scorePopup;
+    [SerializeField] CoinPopupController infoPopup;
 
     [Header("Animation Values")]
     [SerializeField] float jumpPower = 1;
@@ -87,7 +89,7 @@ public class CoinTossAnimation : MonoBehaviour
         meshTransform.DOLocalRotate(targetRotation, jumpDuration, RotateMode.FastBeyond360).SetEase(Ease.Linear);
         transform.DOJump(benchPosition, jumpPower, 1, jumpDuration).SetEase(Ease.OutSine).OnComplete(() =>
         {
-            LandOnHeads();
+            LandOnHeadsNoScore();
             CoinTumble();
         }); ;
         canToss = true;
@@ -122,7 +124,7 @@ public class CoinTossAnimation : MonoBehaviour
 
     public void CoinTumble()
     {
-        meshTransform.DOJump(transform.position, 0.1f, 1, tumbleDuration/4).SetEase(Ease.OutSine)
+        meshTransform.DOJump(transform.position, 0.2f, 1, tumbleDuration/4).SetEase(Ease.OutSine)
             .OnComplete(() => {
                 meshTransform.DOJump(transform.position, 0.05f, 1, tumbleDuration / 4).SetEase(Ease.OutSine);
             });
@@ -137,21 +139,39 @@ public class CoinTossAnimation : MonoBehaviour
         meshTransform.DOLocalRotate(targetRotation, jumpDuration, RotateMode.FastBeyond360).SetEase(Ease.Linear);
         transform.DOJump(transform.position, jumpPower/2, 1, jumpDuration).SetEase(Ease.OutSine).OnComplete(() =>
         {
-            LandOnHeads();
+            LandOnHeadsNoScore();
             CoinTumble();
         });
+    }
+
+    private void LandOnHeadsNoScore()
+    {
+        meshTransform.rotation = Quaternion.Euler(initialRotation.x, initialRotation.y + CoinRotationRandomness(), initialRotation.z);
+        if (meshTransform.position.y != 0f) meshTransform.localPosition = new Vector3(0, 0, 0);
     }
 
     private void LandOnHeads()
     {
         meshTransform.rotation = Quaternion.Euler(initialRotation.x, initialRotation.y + CoinRotationRandomness(), initialRotation.z);
         if (meshTransform.position.y != 0f) meshTransform.localPosition = new Vector3(0, 0, 0);
+
+        if (scorePopup)
+        {
+            var coinInstance = RoundManager.Instance.GetCoinInstanceFromGameObject(gameObject);
+            scorePopup.HeadsPopup(coinInstance?.CoinValue ?? 0f, coinInstance.multiplier?.headsMultiplier ?? 0f, coinInstance?.multiplier ?? false);
+        }
     }
 
     private void LandOnTails()
     {
         meshTransform.rotation = Quaternion.Euler(initialRotation.x + 180, initialRotation.y + CoinRotationRandomness(), initialRotation.z);
         if (meshTransform.position.y != 0f) meshTransform.localPosition = new Vector3(0, 0, 0);
+
+        if (scorePopup)
+        {
+            var coinInstance = RoundManager.Instance.GetCoinInstanceFromGameObject(gameObject);
+            scorePopup.TailsPopup(coinInstance?.CoinValue ?? 0f, coinInstance.multiplier?.tailsMultiplier ?? 0f, coinInstance?.multiplier ?? false);
+        }
     }
 
     private void LandOnSide()
@@ -182,5 +202,14 @@ public class CoinTossAnimation : MonoBehaviour
         Vector3 targetRotation = Vector3.right * 360f * rotationNumber;
         meshTransform.DOLocalRotate(targetRotation, jumpDuration, RotateMode.FastBeyond360).SetEase(Ease.Linear);
         transform.DOJump(transform.position, jumpPower, 1, jumpDuration).SetEase(Ease.OutSine).OnComplete(LandCoin);
+    }
+
+    public void InitializeCoinInfo()
+    {
+        if (infoPopup)
+        {
+            var coinInstance = RoundManager.Instance.GetCoinInstanceFromGameObject(gameObject);
+            infoPopup.UpdatePopupInfo(coinInstance);
+        }
     }
 }

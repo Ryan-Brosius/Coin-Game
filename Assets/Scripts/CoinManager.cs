@@ -175,6 +175,12 @@ public class CoinManager : MonoBehaviour
         return coin.CoinValue;
     }
 
+    public float GetCoinChances(CoinInstance coin)
+    {
+        coin.PrepareCoinChances(this);
+        return coin.currentHeadsChance;
+    }
+
     //TODO: Fix this later to like actually do stuff
     public void ReflipAllBeforeCurrent(CoinEventType type, CoinInstance coin, float value)
     {
