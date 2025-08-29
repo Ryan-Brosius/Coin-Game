@@ -110,8 +110,11 @@ public class RoundManager : MonoBehaviour
         {
             if (coin.TryGetComponent<CoinTossAnimation>(out CoinTossAnimation coinAnim))
             {
-                coinAnim.ReturnCoin();
-                yield return new WaitForSeconds(startTossDelay);
+                if (!coinAnim.CanBeTossed())
+                {
+                    coinAnim.ReturnCoin();
+                    yield return new WaitForSeconds(startTossDelay);
+                }
             }
         }
         yield return null;

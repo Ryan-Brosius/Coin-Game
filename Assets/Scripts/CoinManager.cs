@@ -247,7 +247,7 @@ public class CoinManager : MonoBehaviour
                 score *= coin.multiplier.GetMultiplier(coin.lastFlippedState == CoinInstance.flippedState.Heads);
             }
         }
-
-        return score;
+        float roundedScore = Mathf.Round(score);
+        return roundedScore;
     }
 }

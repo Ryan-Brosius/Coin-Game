@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Heavy Coin
   m_EditorClassIdentifier: 
   gimmickName: Heavy
-  gimmickDescription: 
+  gimmickDescription: Reflip all other tossed coins & recalculate lot
   effects:
   - {fileID: 11400000, guid: 7bb47917fc81fc246a38a70342137dad, type: 2}
   rarity: 2

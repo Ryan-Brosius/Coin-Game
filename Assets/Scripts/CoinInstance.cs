@@ -111,6 +111,22 @@ public class CoinInstance
         //coinManager.CoinEventFlipEnd(this);
     }
 
+    public float GetCoinValue(bool isHeads)
+    {
+        float possibleValue = isHeads ? baseHeadsValue : baseTailsValue;
+        if (gimmick && !debuffed)
+            possibleValue = gimmick.ApplyEffect(possibleValue, isHeads, CoinManager.Instance, this);
+        return possibleValue;
+    }
+
+    public float GetMultiplierValue(bool isHeads)
+    {
+        float possibleValue = isHeads ? multiplier.headsMultiplier : multiplier.tailsMultiplier;
+        if (gimmick && !debuffed)
+            possibleValue = gimmick.ApplyEffect(possibleValue, isHeads, CoinManager.Instance, this);
+        return possibleValue;
+    }
+
     public string FlippedDebugText()
     {
         return $"<color=green>{CoinName}</color> flipped {lastFlippedState} gave {CoinValue} points!";
