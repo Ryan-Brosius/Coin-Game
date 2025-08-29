@@ -52,6 +52,10 @@ public class CoinTossAnimation : MonoBehaviour
             TossCoin(target.position);
             canToss = false;
         }
+        else
+        {
+            RetossCoin();
+        }
     }
 
     // Animation to toss coin
@@ -66,6 +70,13 @@ public class CoinTossAnimation : MonoBehaviour
         
         // Jumps to the target location and calls function to rotate to the correct coin face upon landing
         transform.DOJump(target, jumpPower, 1, jumpDuration).SetEase(Ease.OutSine).OnComplete(LandCoin);
+    }
+
+    public void RetossCoin()
+    {
+        var coinInstance = RoundManager.Instance.GetCoinInstanceFromGameObject(gameObject);
+        SetLandingFace((LandingFace)(int)coinInstance.lastFlippedState);
+        FlipInPlaceAnimation();
     }
 
     // Returns the coin back to the coin bench
@@ -94,7 +105,6 @@ public class CoinTossAnimation : MonoBehaviour
         if (currentFace == LandingFace.Side)
         {
             LandOnSide();
-            return;
         }
         if (currentFace == LandingFace.Heads)
         {
@@ -162,5 +172,15 @@ public class CoinTossAnimation : MonoBehaviour
     public bool CanBeTossed()
     {
         return canToss;
+    }
+
+    // Prone to breaking? yes, fix later
+    public void FlipInPlaceAnimation()
+    {
+        if (canToss) return;
+
+        Vector3 targetRotation = Vector3.right * 360f * rotationNumber;
+        meshTransform.DOLocalRotate(targetRotation, jumpDuration, RotateMode.FastBeyond360).SetEase(Ease.Linear);
+        transform.DOJump(transform.position, jumpPower, 1, jumpDuration).SetEase(Ease.OutSine).OnComplete(LandCoin);
     }
 }
