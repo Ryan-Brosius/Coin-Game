@@ -3,26 +3,33 @@ using UnityEngine;
 
 public class HoverOutline : MonoBehaviour
 {
+    [Header ("Outline")]
     public Material outlineMaterial;
     [SerializeField] CoinTossAnimation animationScript;
     [SerializeField] Renderer coinMesh;
     private Material[] originalMaterials;
 
+    [Header("Popup")]
+    [SerializeField] GameObject infoPopup;
+
 
     private void Awake()
     {
         originalMaterials = coinMesh.materials;
+        if (infoPopup) infoPopup.SetActive(false);
         if (animationScript == null) animationScript = gameObject.GetComponent<CoinTossAnimation>();
     }
 
     private void OnMouseEnter()
     {
         ApplyOutline();
+        ShowPopup();
     }
 
     private void OnMouseExit()
     {
         RemoveOutline();
+        HidePopup();
     }
 
     void ApplyOutline()
@@ -46,5 +53,21 @@ public class HoverOutline : MonoBehaviour
         {
             coinMesh.materials = originalMaterials;
         }
+    }
+
+    void ShowPopup()
+    {
+        if (animationScript.CanBeTossed())
+            infoPopup.SetActive(true);
+    }
+
+    void HidePopup()
+    {
+        infoPopup.SetActive(false);
+    }
+
+    public void UpdatePopUpInfo()
+    {
+        //update the coin info stuff here
     }
 }
