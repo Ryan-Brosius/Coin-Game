@@ -29,6 +29,16 @@ public class RoundManager : MonoBehaviour
     [SerializeField] int currentToss = 0;
     [SerializeField] int maxTosses = 10;
 
+    [Header("Scoring System")]
+    [SerializeField] int currentRound = 0;
+    [SerializeField] float currentScore = 0;
+    [SerializeField] float firstRange = 0.25f;
+    [SerializeField] float secondRange = 0.1f;
+
+    [Header("Cash Out")]
+    [SerializeField] CashoutUiController cashoutController;
+    [SerializeField] BiscuitsManager biscuitManager;
+
     private float _scoreToGet;
     private float ScoreToGet
     {
@@ -86,6 +96,7 @@ public class RoundManager : MonoBehaviour
     public void EndRound()
     {
         currentToss = 0;
+        if (biscuitManager && cashoutController) biscuitManager.AddBiscuits(cashoutController.GetCurrentCashout(CheckScoreRange(currentScore)));
         CoinManager.Instance.EndRound();
         StartCoroutine(ReturnAnimation());
         GenerateScoreToGet();
@@ -149,12 +160,44 @@ public class RoundManager : MonoBehaviour
         currentScoreText.text = $"0¢";
         System.Random random = new System.Random();
         ScoreToGet = random.Next(10, 61) * 5;
+        ScoreUpdate();
     }
 
     // Helper that tells us a coin was just flipped
     public void CoinFlipAnimationEnd(GameObject coin)
     {
         coinManager.CoinEventFlipEnd(GetCoinInstanceFromGameObject(coin));
-        currentScoreText.text = $"{CoinManager.Instance.GetCurrentTotalRoundScore()}¢";
+        ScoreUpdate();
+    }
+
+    public void ScoreUpdate()
+    {
+        currentScore = CoinManager.Instance.GetCurrentTotalRoundScore();
+        currentScoreText.text = $"{currentScore}¢";
+
+        if (cashoutController)
+        {
+            cashoutController.UpdateCashoutTexts(CheckScoreRange(currentScore));
+        }
+    }
+
+    CashoutUiController.cashoutOption CheckScoreRange(float score)
+    {
+        if (score == ScoreToGet)
+        {
+            return CashoutUiController.cashoutOption.Exact;
+        }
+        else if (score > (_scoreToGet * (1 - secondRange)) && score < (_scoreToGet * (1 + secondRange)))
+        {
+            return CashoutUiController.cashoutOption.Second;
+        }
+        else if (score > (_scoreToGet * (1 - firstRange)) && score < (_scoreToGet * (1 + firstRange)))
+        {
+            return CashoutUiController.cashoutOption.First;
+        }
+        else
+        {
+            return CashoutUiController.cashoutOption.None;
+        }
     }
 }

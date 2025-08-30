@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'EXACT = 10
+  m_text: 'EXACT = 9
 
 '
   m_isRightToLeft: 0
@@ -347,10 +347,10 @@ MonoBehaviour:
   m_enableVertexGradient: 1
   m_colorMode: 2
   m_fontColorGradient:
-    topLeft: {r: 1, g: 0.9700888, b: 0.7688679, a: 1}
-    topRight: {r: 1, g: 0.9700888, b: 0.7688679, a: 1}
-    bottomLeft: {r: 1, g: 0.8691972, b: 0, a: 1}
-    bottomRight: {r: 1, g: 0.8691972, b: 0, a: 1}
+    topLeft: {r: 1, g: 0.99607843, b: 0.76862746, a: 1}
+    topRight: {r: 1, g: 0.99607843, b: 0.76862746, a: 1}
+    bottomLeft: {r: 1, g: 0.49803922, b: 0, a: 1}
+    bottomRight: {r: 1, g: 0.49803922, b: 0, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -687,6 +687,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5164934938158048099}
+  - component: {fileID: 2957574833604607991}
   m_Layer: 0
   m_Name: Laundry Basket
   m_TagString: Untagged
@@ -712,6 +713,27 @@ Transform:
   - {fileID: 741635124818498775}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -22.723, z: 0}
+--- !u!114 &2957574833604607991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5709145249418338072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 370a6b9ee6cbdf84e934bb911a9f1386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstCashout: 3
+  secondCashout: 5
+  finalCashout: 9
+  inactiveAlpha: 0.2
+  option1: {fileID: 1908432083754597704}
+  option2: {fileID: 4373812311033114384}
+  option3: {fileID: 2762734769278212999}
+  cashoutText: {fileID: 892447786997009027}
+  biscuitsText: {fileID: 6989354180471212696}
 --- !u!1 &7817799010905478475
 GameObject:
   m_ObjectHideFlags: 0
