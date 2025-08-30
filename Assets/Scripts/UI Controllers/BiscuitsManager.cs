@@ -19,14 +19,17 @@ public class BiscuitsManager : MonoBehaviour
 
     IEnumerator BiscuitAddAnimation(int amount)
     {
+        float relativeSpeed = spawnSpeed;
         for (int i = 0; i < amount; i++)
         {
             GameObject spawn = Instantiate(biscuits, biscuitSpawn.position, Quaternion.identity);
-            spawn.transform.DOLocalMoveY(0f, spawnSpeed)
+            spawn.transform.DOLocalMoveY(0f, relativeSpeed)
                 .OnComplete(() => Destroy(spawn));
-            yield return new WaitForSeconds(spawnSpeed);
+            yield return new WaitForSeconds(relativeSpeed * 0.3f);
             currentBiscuits++;
             UpdateBiscuitText();
+            yield return new WaitForSeconds(relativeSpeed * 0.7f);
+            relativeSpeed *= 0.8f;
         }
     }
 

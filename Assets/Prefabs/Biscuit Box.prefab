@@ -318,7 +318,7 @@ MonoBehaviour:
   biscuitTin: {fileID: 3594152652480765815}
   biscuitsText: {fileID: 4383718977579865269}
   currentBiscuits: 0
-  spawnSpeed: 0.5
+  spawnSpeed: 0.6
 --- !u!1 &6072247560259863266
 GameObject:
   m_ObjectHideFlags: 0
